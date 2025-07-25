@@ -1,0 +1,112 @@
+@font-face {
+    font-family: 'MagicRetro';
+    src: url('fonts/MagicRetro.ttf') format('truetype');
+}
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #e3f2fd;
+    color: #1a3c66;
+    text-align: center;
+}
+.intro {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #e3f2fd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeOut 2.5s ease forwards;
+    animation-delay: 2.5s;
+}
+.intro h1 {
+    font-family: 'MagicRetro', sans-serif;
+    font-size: 2.8rem;
+    color: #2c6db8;
+    animation: popIn 1.5s ease forwards;
+}
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+header { padding: 50px 20px; }
+h1, h2 { color: #2c6db8; }
+p.subtitle { font-size: 1.2rem; margin-bottom: 20px; }
+.btn {
+    display: inline-block;
+    background: #4a90e2;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+.btn:hover { background: #357abd; }
+section {
+    padding: 50px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+}
+section.visible { opacity: 1; transform: translateY(0); }
+.letter {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    text-align: left;
+    line-height: 1.6;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+.gallery img {
+    width: 100%;
+    border-radius: 12px;
+    transition: transform 0.3s;
+}
+.gallery img:hover { transform: scale(1.05); }
+.camera-frame {
+    width: 320px;
+    height: 240px;
+    border: 10px solid #4a90e2;
+    border-radius: 20px;
+    margin: 20px auto;
+    overflow: hidden;
+    background: #fff;
+}
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+button {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+button:hover { background: #357abd; }
+footer {
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #777;
+}
